@@ -1,6 +1,6 @@
 package info.jerrinot.loomexperiment.mess;
 
-import java.util.concurrent.BlockingQueue;
+import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -24,14 +24,18 @@ public final class AtomicLongCounter implements Counter {
     }
 
     // not thread safe
-    public void printStats(BlockingQueue<?>[] queues) {
+    public void printStats(Queue<?>[] queues) {
         long countersNow = get();
         long countersDelta = countersNow - counterBefore;
         long timeNow = System.nanoTime();
         long timeDeltaNanos = timeNow - timeBefore;
         long opsPerMillis = countersDelta / (TimeUnit.NANOSECONDS.toMillis(timeDeltaNanos));
+        long microsPerOps = 1000 / opsPerMillis;
 
-        sb.append("Ops per ms: ").append(opsPerMillis).append('\n');
+        sb.append("Throughput: ").append(opsPerMillis)
+                .append(" ops / ms = 1 operation is processed every ")
+                .append(microsPerOps)
+                .append(" μs");
         if (DEBUG_QUEUE_DEPTH) {
             for (int i = 0; i < queues.length; i++) {
                 sb.append('q').append(i).append(" size: ").append(queues[i].size()).append('\n');
