@@ -1,11 +1,11 @@
-package info.jerrinot.loomexperiment;
+package info.jerrinot.loomexperiment.mess;
 
 import org.jctools.queues.MpmcUnboundedXaddArrayQueue;
 
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
-class BusySpinningExecutor implements Executor {
+final class BusySpinningExecutor implements Executor {
     private final int threadCount;
     private Queue<Runnable> queue = new MpmcUnboundedXaddArrayQueue<>(64);
 
@@ -37,6 +37,4 @@ class BusySpinningExecutor implements Executor {
             }).start();
         }
     }
-
-
 }

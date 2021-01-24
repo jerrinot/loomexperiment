@@ -1,26 +1,26 @@
-package info.jerrinot.loomexperiment.measurements;
+package info.jerrinot.loomexperiment.mess;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class AtomicLongCounter implements Counter {
+public final class AtomicLongCounter implements Counter {
     private static final boolean DEBUG_QUEUE_DEPTH = false;
 
-    private final AtomicLong al = new AtomicLong();
+    private final AtomicLong counter = new AtomicLong();
+    private final StringBuilder sb = new StringBuilder();
 
     private long counterBefore = 0;
     private long timeBefore = System.nanoTime();
-    private final StringBuilder sb = new StringBuilder();
 
     @Override
     public void inc() {
-        al.incrementAndGet();
+        counter.incrementAndGet();
     }
 
     @Override
     public long get() {
-        return al.get();
+        return counter.get();
     }
 
     // not thread safe

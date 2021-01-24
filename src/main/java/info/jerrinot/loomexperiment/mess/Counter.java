@@ -1,4 +1,4 @@
-package info.jerrinot.loomexperiment.measurements;
+package info.jerrinot.loomexperiment.mess;
 
 public interface Counter {
     void inc();

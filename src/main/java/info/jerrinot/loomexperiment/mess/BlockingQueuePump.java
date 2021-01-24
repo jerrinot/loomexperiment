@@ -1,12 +1,12 @@
-package info.jerrinot.loomexperiment;
+package info.jerrinot.loomexperiment.mess;
 
 import java.util.concurrent.BlockingQueue;
 
-class BlockingQueuePump implements TaskExecutor.RunnableWithException {
+public final class BlockingQueuePump implements RunnableWithException {
     private final BlockingQueue<Long> in;
     private final BlockingQueue<Long> out;
 
-    BlockingQueuePump(BlockingQueue<Long> in, BlockingQueue<Long> out) {
+    public BlockingQueuePump(BlockingQueue<Long> in, BlockingQueue<Long> out) {
         this.in = in;
         this.out = out;
     }
