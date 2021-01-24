@@ -2,10 +2,10 @@ package info.jerrinot.loomexperiment.mess;
 
 import java.lang.reflect.Array;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public final class Utils {
-
     private Utils() {
     }
 
@@ -29,10 +29,4 @@ public final class Utils {
         }
         return arr;
     }
-
-    public static void doSomeWork(long intensity) {
-        long deadLine = System.nanoTime() + TimeUnit.MICROSECONDS.toNanos(intensity);
-        while (System.nanoTime() < deadLine) {}
-    }
-
 }
