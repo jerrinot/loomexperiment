@@ -24,15 +24,15 @@ import static info.jerrinot.loomexperiment.mess.WorkSimulator.NOOP;
  * Counting number of items who made it through the full ring
  */
 public final class RingExperiment {
-    private static final int PIPELINE_LENGTH = 100;       // how many queues in total
+    private static final int PIPELINE_LENGTH = 5;       // how many queues in total
     private static final int QUEUE_CAPACITY = 1000;        // capacity of each queue
     private static final int WORKERS_PER_STAGE = 1;     // how many workers per each stage
     private static final Long WORK_ITEM = 1L;           // the item to be send through
-    private static final ThreadSchedulerStrategy THREAD_SCHEDULER = VIRTUAL_BUSY_SPINNING_SCHED;
+    private static final ThreadSchedulerStrategy THREAD_SCHEDULER = PHYSICAL_OS;
     private static final WorkSimulator WORK_SIMULATOR = NOOP;
 
     @Test
-    public void ring_blocking() throws InterruptedException {
+    public void ring_blocking_queues() throws InterruptedException {
         validateParameters();
 
         Supplier<BlockingQueue<Long>> queueSupplier = () -> new ArrayBlockingQueue<>(QUEUE_CAPACITY);
@@ -73,7 +73,7 @@ public final class RingExperiment {
 
     private void validateParameters() {
         if (PIPELINE_LENGTH < 2) {
-            throw new IllegalStateException("You need at least 2 queue to create a ring");
+            throw new IllegalStateException("You need at least 2 queues to create a ring");
         }
     }
 }

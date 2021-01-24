@@ -31,7 +31,7 @@ public final class DataFlowExperiment {
     private static final WorkSimulator WORK_SIMULATOR = NOOP;
 
     @Test
-    public void dataFlow_blocking() throws InterruptedException {
+    public void dataFlow_blocking_queues() throws InterruptedException {
         Supplier<BlockingQueue<Long>> queueSupplier = () -> new ArrayBlockingQueue<>(QUEUE_CAPACITY);
         var queues = Utils.supplyToArray(queueSupplier, PIPELINE_LENGTH);
         TaskExecutor taskExecutor = new TaskExecutor(THREAD_SCHEDULER);
